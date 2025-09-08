@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pramod Lakshan Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a192f;
+            color: #ccd6f6;
+        }
+        .accent-color {
+            color: #64ffda;
+        }
+        .nav-link {
+            transition: color 0.3s;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #64ffda;
+        }
+        .section {
+            min-height: 80vh;
+            padding-top: 6rem;
+            padding-bottom: 4rem;
+        }
+        .project-card {
+            background-color: #112240;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+        }
+        .skill-badge {
+            background-color: rgba(100, 255, 218, 0.1);
+            color: #64ffda;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a192f;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #112240;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #233554;
+        }
+    </style>
+</head>
+<body class="antialiased leading-relaxed">
+
+    <!-- Header & Navigation -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 bg-opacity-90 backdrop-blur-md transition-all duration-300 shadow-md" style="background-color: rgba(10, 25, 47, 0.85);">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#hero" class="text-2xl font-bold accent-color">Pramod</a>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#about" class="nav-link text-sm">About</a>
+                <a href="#experience" class="nav-link text-sm">Experience</a>
+                <a href="#projects" class="nav-link text-sm">Projects</a>
+                <a href="#contact" class="nav-link text-sm">Contact</a>
+                <a href="#" class="border border-[#64ffda] text-[#64ffda] px-4 py-2 rounded-md text-sm hover:bg-[#64ffda] hover:bg-opacity-10 transition">Resume</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-[#64ffda]">
+                <svg id="menu-open-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                <svg id="menu-close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#112240] text-center">
+            <a href="#about" class="block py-3 text-sm nav-link">About</a>
+            <a href="#experience" class="block py-3 text-sm nav-link">Experience</a>
+            <a href="#projects" class="block py-3 text-sm nav-link">Projects</a>
+            <a href="#contact" class="block py-3 text-sm nav-link">Contact</a>
+            <a href="#" class="block py-4 mx-8 my-4 border border-[#64ffda] text-[#64ffda] rounded-md text-sm hover:bg-[#64ffda] hover:bg-opacity-10 transition">Resume</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 md:px-12 lg:px-24">
+
+        <!-- Hero Section -->
+        <section id="hero" class="section flex items-center justify-center text-left">
+            <div>
+                <p class="text-lg accent-color mb-4">Hi, my name is</p>
+                <h1 class="text-4xl md:text-7xl font-bold text-slate-200">Pramod Lakshan.</h1>
+                <h2 class="text-4xl md:text-7xl font-bold text-slate-400 mt-2">I build things for the web.</h2>
+                <p class="mt-6 max-w-xl text-slate-400">
+                    I’m a Computing & Information Systems  undergraduate specializing in software development. Currently, I’m focused on building accessible, human-centered products and sharpening my skills in cloud technologies.
+                </p>
+                <a href="#projects" class="inline-block mt-8 px-8 py-4 border border-[#64ffda] text-[#64ffda] rounded-md hover:bg-[#64ffda] hover:bg-opacity-10 transition duration-300">
+                    Check out my work!
+                </a>
+            </div>
+        </section>
+
+        <!-- About Me -->
+        <section id="about" class="section">
+            <h2 class="text-3xl font-bold text-slate-200 flex items-center mb-12">
+                <span class="accent-color text-2xl mr-3">01.</span> About Me
+                <span class="flex-grow ml-6 h-px bg-slate-700"></span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-12 items-center">
+                <div class="md:col-span-3 text-slate-400 space-y-4">
+                    <p>
+                        Hello! I'm Pramod Lakshan, a passionate undergraduate studying Computing and Information Systems at Sabaragamuwa University of Sri Lanka. My journey into technology began with a curiosity for building things for the web, and I’ve since been captivated by the power of code to create innovative solutions.
+                    </p>
+                      <p>  Throughout my studies, I’ve worked on various projects, from developing dynamic websites using HTML, CSS, and JavaScript to exploring database management with MySQL. I also enjoy coding in Java, C, and Dart, aiming to write clean and efficient code that delivers impactful results.
+                    </p>
+                    
+                    <p>Here are a few technologies I’ve been working with recently:</p>
+                    <ul class="grid grid-cols-2 gap-2 text-sm">
+                        <li class="flex items-center"><i data-lucide="chevron-right" class="w-4 h-4 accent-color"></i>HTML</li>
+                        <li class="flex items-center"><i data-lucide="chevron-right" class="w-4 h-4 accent-color"></i>CSS</li>
+                        <li class="flex items-center"><i data-lucide="chevron-right" class="w-4 h-4 accent-color"></i>JavaScript</li>
+                        <li class="flex items-center"><i data-lucide="chevron-right" class="w-4 h-4 accent-color"></i>Java</li>
+                        <li class="flex items-center"><i data-lucide="chevron-right" class="w-4 h-4 accent-color"></i>C</li>
+                        <li class="flex items-center"><i data-lucide="chevron-right" class="w-4 h-4 accent-color"></i>Dart</li>
+                        <li class="flex items-center"><i data-lucide="chevron-right" class="w-4 h-4 accent-color"></i>MySQL</li>
+
+                    </ul>
+                </div>
+                <div class="md:col-span-2 relative group w-full max-w-sm mx-auto">
+                    <div class="absolute -inset-0.5 bg-gradient-to-r from-pink-600 to-purple-600 rounded-lg blur opacity-60 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                     <div class="relative w-full h-80 rounded-lg bg-[#0a192f] overflow-hidden">
+                        <img src="assets/WhatsApp Image 2025-08-06 at 13.50.12_dc86a21c.jpg" alt="Pramod Lakshan" class="object-cover w-full h-full grayscale hover:grayscale-0 transition duration-500">
+                     </div>
+                </div>
+            </div>
+        </section>
+
+     
+
+
+        <!-- Projects -->
+        <section id="projects" class="section">
+            <h2 class="text-3xl font-bold text-slate-200 flex items-center mb-12">
+                <span class="accent-color text-2xl mr-3">02.</span> Some Things I've Built
+                <span class="flex-grow ml-6 h-px bg-slate-700"></span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Project 1 -->
+                <div class="project-card rounded-md p-6 flex flex-col">
+                    <div class="flex justify-between items-center mb-4">
+                        <i data-lucide="folder" class="w-10 h-10 accent-color"></i>
+                        <div class="flex space-x-2">
+                            <a href="https://github.com/pramodlakshan125/Traveler-web-site" class="text-slate-400 hover:accent-color"><i data-lucide="github" class="w-5 h-5"></i></a>
+                            <a href="https://pramodlakshan125.github.io/Traveler-web-site/" class="text-slate-400 hover:accent-color"><i data-lucide="external-link" class="w-5 h-5"></i></a>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-200 mb-2">Traveller website</h3>
+                    <p class="text-slate-400 text-sm flex-grow">A travel helper to find about interesting places in Sri lanka.</p>
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <span class="skill-badge text-xs font-mono px-2 py-1 rounded-full">HTML</span>
+                        <span class="skill-badge text-xs font-mono px-2 py-1 rounded-full">CSS</span>
+                        <span class="skill-badge text-xs font-mono px-2 py-1 rounded-full">JavaScript</span>
+                        
+                    </div>
+                </div>
+              
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="section text-center max-w-xl mx-auto">
+            <h2 class="accent-color text-lg font-mono mb-4">03. What's Next?</h2>
+            <h3 class="text-5xl font-bold text-slate-200 mb-4">Get In Touch</h3>
+            <p class="text-slate-400 mb-8">
+                I'm currently looking for new opportunities and my inbox is always open. Whether you have a question or just want to say hi, I'll do my best to get back to you!
+            </p>
+            <a href="pramodlakshan125@gmail.com" class="inline-block px-8 py-4 border border-[#64ffda] text-[#64ffda] rounded-md hover:bg-[#64ffda] hover:bg-opacity-10 transition duration-300">
+                Say Hello
+            </a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-6">
+        <div class="flex justify-center space-x-6 mb-4 md:hidden">
+             <a href="https://github.com/pramodlakshan125" class="text-slate-400 hover:accent-color"><i data-lucide="github" class="w-6 h-6"></i></a>
+             <a href="www.linkedin.com/in/pramod-lakshan-983581319" class="text-slate-400 hover:accent-color"><i data-lucide="linkedin" class="w-6 h-6"></i></a>
+             <a href="#" class="text-slate-400 hover:accent-color"><i data-lucide="twitter" class="w-6 h-6"></i></a>
+        </div>
+        <p class="text-slate-500 text-xs font-mono">
+            © 2025 Pramod Lakshan . All Rights Reserved.
+        </p>
+    </footer>
+
+    <!-- Social Links Side Bar -->
+    <div class="hidden md:block fixed bottom-0 left-12" style="writing-mode: vertical-rl;">
+        <div class="flex flex-col items-center space-y-6">
+            <a href="https://github.com/pramodlakshan125" class="text-slate-400 hover:accent-color transition transform hover:-translate-y-1"><i data-lucide="github" class="w-5 h-5"></i></a>
+            <a href="www.linkedin.com/in/pramod-lakshan-983581319" class="text-slate-400 hover:accent-color transition transform hover:-translate-y-1"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+            <a href="#" class="text-slate-400 hover:accent-color transition transform hover:-translate-y-1"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+            <div class="h-24 w-px bg-slate-600 mt-6"></div>
+        </div>
+    </div>
+    <div class="hidden md:block fixed bottom-0 right-12" style="writing-mode: vertical-rl;">
+        <div class="flex flex-col items-center space-y-6">
+            <a href="pramodlakshan125@gmail.com" class="text-slate-400 hover:accent-color text-xs font-mono tracking-widest transition transform hover:-translate-y-1">pramodlakshan125@gmail.com</a>
+            <div class="h-24 w-px bg-slate-600 mt-6"></div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuOpenIcon = document.getElementById('menu-open-icon');
+        const menuCloseIcon = document.getElementById('menu-close-icon');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            menuOpenIcon.classList.toggle('hidden');
+            menuCloseIcon.classList.toggle('hidden');
+        });
+        
+        // Hide mobile menu on link click
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') {
+                mobileMenu.classList.add('hidden');
+                menuOpenIcon.classList.remove('hidden');
+                menuCloseIcon.classList.add('hidden');
+            }
+        });
+
+
+        // Header scroll effect
+        let lastScrollTop = 0;
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop) {
+                // Downscroll
+                header.style.top = '-100px';
+            } else {
+                // Upscroll
+                header.style.top = '0';
+            }
+            if (scrollTop > 100) {
+                header.classList.add('shadow-lg');
+            } else {
+                header.classList.remove('shadow-lg');
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
+        });
+
+        // Active link highlighting on scroll
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        function changeLinkState() {
+            let index = sections.length;
+
+            while(--index && window.scrollY + 100 < sections[index].offsetTop) {}
+            
+            navLinks.forEach((link) => link.classList.remove('active'));
+            // Check if there is a corresponding nav link before adding the active class
+            if (navLinks[index]) {
+                navLinks[index].classList.add('active');
+            }
+        }
+
+        // Initial check in case the page is loaded on a different section
+        changeLinkState();
+        window.addEventListener('scroll', changeLinkState);
+
+    </script>
+</body>
+</html>
