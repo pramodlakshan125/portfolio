@@ -78,23 +78,23 @@ const Skills = () => {
     categories.map((category, index) => (
       <motion.div
         key={category.title}
-        className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:border-blue-600 hover:shadow-md transition-all"
+        className="bg-white dark:bg-slate-800/80 border border-gray-200 dark:border-slate-700 rounded-2xl p-6 shadow-sm hover:border-blue-600 dark:hover:border-blue-500 hover:shadow-md transition-all"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: index * 0.1 }}
         whileHover={{ y: -5 }}
       >
         <div className="flex flex-col items-center gap-3 mb-5 text-center">
-          <div className="w-14 h-14 flex items-center justify-center border-2 border-gray-300 rounded-full text-xl text-gray-900">
+          <div className="w-14 h-14 flex items-center justify-center border-2 border-gray-300 dark:border-slate-600 rounded-full text-xl text-gray-900 dark:text-blue-400">
             {category.icon}
           </div>
-          <h3 className="text-base font-bold text-gray-900">{category.title}</h3>
+          <h3 className="text-base font-bold text-gray-900 dark:text-white">{category.title}</h3>
         </div>
         <div className="grid grid-cols-2 gap-2">
           {(category.skills || category.tools).map((item) => (
             <div
               key={item.name}
-              className="flex items-center justify-center gap-2 px-3 py-2 bg-blue-50/50 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:border-blue-600 hover:-translate-y-0.5 transition-all"
+              className="flex items-center justify-center gap-2 px-3 py-2 bg-blue-50/50 dark:bg-slate-700/50 border border-gray-200 dark:border-slate-600 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-200 hover:border-blue-600 dark:hover:border-blue-400 hover:-translate-y-0.5 transition-all"
             >
               <span className="text-base">{item.icon}</span>
               <span className="truncate">{item.name}</span>
@@ -108,7 +108,7 @@ const Skills = () => {
     <section id="skills" className="py-24">
       <div className="max-w-6xl mx-auto px-8">
         <motion.h2
-          className="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-900"
+          className="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-900 dark:text-white"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -118,7 +118,7 @@ const Skills = () => {
         </motion.h2>
 
         <motion.p
-          className="text-center text-gray-500 text-base max-w-xl mx-auto mb-10 leading-relaxed"
+          className="text-center text-gray-500 dark:text-gray-400 text-base max-w-xl mx-auto mb-10 leading-relaxed"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -128,7 +128,7 @@ const Skills = () => {
         </motion.p>
 
         <motion.div
-          className="flex flex-wrap justify-center gap-1 mb-10 bg-white border border-gray-200 rounded-full p-1.5 w-fit mx-auto shadow-sm"
+          className="flex flex-wrap justify-center gap-1 mb-10 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-full p-1.5 w-fit mx-auto shadow-sm"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -142,8 +142,8 @@ const Skills = () => {
               whileTap={{ scale: 0.95 }}
               className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all ${
                 activeTab === tab.name
-                  ? 'bg-gray-900 text-white'
-                  : 'text-gray-500 hover:text-gray-900 hover:bg-gray-100'
+                  ? 'bg-gray-900 text-white dark:bg-blue-600'
+                  : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-slate-700'
               }`}
             >
               {tab.icon}
@@ -178,17 +178,17 @@ const Skills = () => {
               {softSkills.map((skill, index) => (
                 <motion.div
                   key={skill.title}
-                  className="bg-white border border-gray-200 rounded-2xl p-6 text-center shadow-sm hover:border-blue-600 hover:shadow-md transition-all"
+                  className="bg-white dark:bg-slate-800/80 border border-gray-200 dark:border-slate-700 rounded-2xl p-6 text-center shadow-sm hover:border-blue-600 dark:hover:border-blue-500 hover:shadow-md transition-all"
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   whileHover={{ y: -5, scale: 1.02 }}
                 >
-                  <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center border-2 border-gray-300 rounded-full text-xl text-gray-900">
+                  <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center border-2 border-gray-300 dark:border-slate-600 rounded-full text-xl text-gray-900 dark:text-blue-400">
                     {skill.icon}
                   </div>
-                  <h3 className="text-base font-bold text-gray-900 mb-2">{skill.title}</h3>
-                  <p className="text-gray-500 text-sm leading-relaxed">{skill.description}</p>
+                  <h3 className="text-base font-bold text-gray-900 dark:text-white mb-2">{skill.title}</h3>
+                  <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">{skill.description}</p>
                 </motion.div>
               ))}
             </motion.div>

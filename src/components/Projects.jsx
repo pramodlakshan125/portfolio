@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaCode, FaServer, FaMobileAlt, FaExternalLinkAlt, FaGithub } from 'react-icons/fa'
-import { SiReact } from 'react-icons/si'
 
 const Projects = () => {
   const [activeCategory, setActiveCategory] = useState('All')
@@ -9,22 +8,11 @@ const Projects = () => {
   const categories = [
     { name: 'All', icon: <FaCode /> },
     { name: 'Fullstack', icon: <FaServer /> },
-    { name: 'Frontend', icon: <SiReact /> },
     { name: 'Mobile', icon: <FaMobileAlt /> },
   ]
 
   // Replace each of these with your own real projects
   const projects = [
-    {
-      title: 'Project Name One',
-      description: 'A short description of what this project does, what problem it solves, and what makes it interesting. Keep it to 2-3 sentences.',
-      role: 'Frontend Developer',
-      technologies: ['React', 'Tailwind CSS', 'JavaScript'],
-      category: 'Frontend',
-      liveLink: '',
-      githubLink: '',
-      icon: <SiReact />
-    },
     {
       title: 'Project Name Two',
       description: 'Another short project description. What did you build, and what did you learn from building it?',
@@ -52,10 +40,10 @@ const Projects = () => {
     : projects.filter((project) => project.category === activeCategory)
 
   return (
-    <section id="projects" className="bg-gray-50 py-24">
+    <section id="projects" className="bg-gray-50 dark:bg-slate-900/50 py-24">
       <div className="max-w-6xl mx-auto px-8">
         <motion.h2
-          className="text-3xl md:text-4xl font-bold text-center mb-10 text-gray-900"
+          className="text-3xl md:text-4xl font-bold text-center mb-10 text-gray-900 dark:text-white"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -80,7 +68,7 @@ const Projects = () => {
               className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium border transition-all ${
                 activeCategory === category.name
                   ? 'bg-blue-600 text-white border-blue-600'
-                  : 'bg-white text-gray-600 border-gray-200 hover:border-blue-600 hover:text-blue-600'
+                  : 'bg-white dark:bg-slate-800 text-gray-600 dark:text-gray-300 border-gray-200 dark:border-slate-700 hover:border-blue-600 dark:hover:border-blue-400 hover:text-blue-600 dark:hover:text-blue-400'
               }`}
             >
               {category.icon}
@@ -92,7 +80,7 @@ const Projects = () => {
         <AnimatePresence mode="wait">
           <motion.div
             key={activeCategory}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -101,7 +89,7 @@ const Projects = () => {
             {filteredProjects.map((project, index) => (
               <motion.div
                 key={project.title}
-                className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow"
+                className="bg-white dark:bg-slate-800/80 border border-gray-200 dark:border-slate-700 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -109,7 +97,7 @@ const Projects = () => {
                 whileHover={{ y: -8 }}
               >
                 <div className="flex justify-between items-start mb-4 gap-3">
-                  <h3 className="text-lg font-bold text-gray-900 leading-snug">{project.title}</h3>
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white leading-snug">{project.title}</h3>
                   <div className="flex gap-2 flex-shrink-0">
                     {project.liveLink && (
                       <a
@@ -117,7 +105,7 @@ const Projects = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         title="Visit"
-                        className="w-9 h-9 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-colors"
+                        className="w-9 h-9 rounded-lg bg-blue-50 dark:bg-slate-700/60 text-blue-600 dark:text-blue-400 flex items-center justify-center hover:bg-blue-600 dark:hover:bg-blue-600 hover:text-white transition-colors"
                       >
                         <FaExternalLinkAlt className="text-sm" />
                       </a>
@@ -128,7 +116,7 @@ const Projects = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         title="View Code"
-                        className="w-9 h-9 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-colors"
+                        className="w-9 h-9 rounded-lg bg-blue-50 dark:bg-slate-700/60 text-blue-600 dark:text-blue-400 flex items-center justify-center hover:bg-blue-600 dark:hover:bg-blue-600 hover:text-white transition-colors"
                       >
                         <FaGithub className="text-sm" />
                       </a>
@@ -136,9 +124,9 @@ const Projects = () => {
                   </div>
                 </div>
 
-                <p className="text-gray-500 text-sm leading-relaxed mb-4">
+                <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-4">
                   {project.description}
-                  <strong className="block mt-2 text-gray-900 font-semibold text-xs">
+                  <strong className="block mt-2 text-gray-900 dark:text-gray-200 font-semibold text-xs">
                     Role: {project.role}
                   </strong>
                 </p>
@@ -147,7 +135,7 @@ const Projects = () => {
                   {project.technologies.map((tech) => (
                     <span
                       key={tech}
-                      className="text-xs font-medium px-3 py-1 rounded-full bg-blue-50 text-blue-600"
+                      className="text-xs font-medium px-3 py-1 rounded-full bg-blue-50 dark:bg-slate-700/60 text-blue-600 dark:text-blue-300"
                     >
                       {tech}
                     </span>
