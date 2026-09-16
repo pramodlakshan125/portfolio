@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { FaEnvelope, FaLinkedin, FaGithub, FaPaperPlane } from 'react-icons/fa'
+import { FaEnvelope, FaLinkedin, FaGithub, FaPaperPlane, FaCheckCircle, FaExclamationCircle, FaSpinner } from 'react-icons/fa'
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -10,17 +10,90 @@ const Contact = () => {
     message: ''
   })
 
+  const [status, setStatus] = useState({
+    submitting: false,
+    success: false,
+    error: null
+  })
+
+  const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || ''
+  const formspreeEndpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT || ''
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     })
+    if (status.success || status.error) {
+      setStatus({ submitting: false, success: false, error: null })
+    }
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log('Form submitted:', formData)
-    alert('Thank you for your message! I will get back to you soon.')
+    setStatus({ submitting: true, success: false, error: null })
+
+    // 1. Try Web3Forms if access key is set
+    if (accessKey) {
+      try {
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+          },
+          body: JSON.stringify({
+            access_key: accessKey,
+            name: formData.name,
+            email: formData.email,
+            subject: formData.subject,
+            message: formData.message,
+            from_name: `${formData.name} (Portfolio Inquiry)`,
+          })
+        })
+        const result = await response.json()
+        if (result.success) {
+          setStatus({ submitting: false, success: true, error: null })
+          setFormData({ name: '', email: '', subject: '', message: '' })
+          return
+        } else {
+          throw new Error(result.message || 'Failed to send message')
+        }
+      } catch (err) {
+        console.warn('Web3Forms error, using mailto fallback:', err)
+      }
+    }
+
+    // 2. Try Formspree if endpoint is set
+    if (formspreeEndpoint) {
+      try {
+        const response = await fetch(formspreeEndpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+          },
+          body: JSON.stringify(formData)
+        })
+        if (response.ok) {
+          setStatus({ submitting: false, success: true, error: null })
+          setFormData({ name: '', email: '', subject: '', message: '' })
+          return
+        }
+      } catch (err) {
+        console.warn('Formspree error, using mailto fallback:', err)
+      }
+    }
+
+    // 3. Fallback: Open visitor's email client directly pre-filled
+    const mailtoUrl = `mailto:pramodlakshan125@gmail.com?subject=${encodeURIComponent(formData.subject || 'Portfolio Inquiry')}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`
+    window.location.href = mailtoUrl
+
+    setStatus({
+      submitting: false,
+      success: true,
+      error: null
+    })
     setFormData({ name: '', email: '', subject: '', message: '' })
   }
 
@@ -104,13 +177,46 @@ const Contact = () => {
               className="bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-3xl px-7 py-5 text-gray-900 dark:text-white dark:placeholder-gray-400 text-sm resize-y min-h-[160px] focus:outline-none focus:border-blue-600 dark:focus:border-blue-400 focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900/30 transition-all"
             ></textarea>
 
+            {status.success && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="p-4 rounded-2xl bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800/50 text-green-700 dark:text-green-300 text-sm flex items-center gap-3"
+              >
+                <FaCheckCircle className="text-lg flex-shrink-0 text-green-600 dark:text-green-400" />
+                <span>Thank you! Your message has been sent successfully. I will get back to you soon.</span>
+              </motion.div>
+            )}
+
+            {status.error && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="p-4 rounded-2xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800/50 text-red-700 dark:text-red-300 text-sm flex items-center gap-3"
+              >
+                <FaExclamationCircle className="text-lg flex-shrink-0 text-red-600 dark:text-red-400" />
+                <span>{status.error}</span>
+              </motion.div>
+            )}
+
             <motion.button
               type="submit"
-              className="self-start bg-gray-50 dark:bg-slate-700 text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-slate-600 rounded-full px-10 py-4 text-sm font-semibold flex items-center gap-3 hover:bg-white dark:hover:bg-slate-600 hover:text-gray-900 dark:hover:text-white hover:border-blue-600 dark:hover:border-blue-400 hover:shadow-md transition-all"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              disabled={status.submitting}
+              className="self-start bg-blue-600 hover:bg-blue-700 text-white rounded-full px-10 py-4 text-sm font-semibold flex items-center gap-3 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed transition-all"
+              whileHover={status.submitting ? {} : { scale: 1.02 }}
+              whileTap={status.submitting ? {} : { scale: 0.98 }}
             >
-              Send Message <FaPaperPlane />
+              {status.submitting ? (
+                <>
+                  <FaSpinner className="animate-spin text-sm" />
+                  <span>Sending Message...</span>
+                </>
+              ) : (
+                <>
+                  <span>Send Message</span>
+                  <FaPaperPlane className="text-xs" />
+                </>
+              )}
             </motion.button>
           </form>
         </motion.div>
